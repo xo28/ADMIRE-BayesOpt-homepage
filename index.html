@@ -76,7 +76,7 @@
                   </div>
 
                   <div class="is-size-5 publication-authors">
-                    <span class="author-block"><sup>1</sup>University of Virginia,&nbsp; <sup>2</sup>Thomson Reuters Foundational Research,&nbsp; <sup>3</sup>Imperial College London&nbsp; <sup>4</sup>Graphcore <br>In Progress</span>
+                    <span class="author-block"><sup>1</sup>University of Virginia,&nbsp; <sup>2</sup>Thomson Reuters Foundational Research,&nbsp; <sup>3</sup>Imperial College London,&nbsp; <sup>4</sup>Graphcore <br>In Progress</span>
                     <span class="eql-cntrb"><small><br><sup>*</sup>Indicates Equal Contribution</small></span>
                   </div>
 
@@ -144,10 +144,11 @@
             Determining the optimal data mixture for large language model training remains a challenging problem with an outsized impact on performance. 
 In practice, language model developers continue to rely on heuristic exploration since no learning-based approach has emerged as a reliable solution. 
 In this work, we propose to view the selection of training data mixtures as a black-box hyperparameter optimization problem, for which Bayesian Optimization is a well-established class of appropriate algorithms. 
-Firstly, we cast data mixture learning as a sequential decision-making problem, in which we aim to find a suitable trade-off between the computational cost of training exploratory (proxy-) models and final mixture performance. 
-Secondly, we systematically explore the properties of transferring mixtures learned at a small scale to larger-scale experiments, providing insights and highlighting opportunities for research at a modest scale. 
+<br>Firstly, we cast data mixture learning as a sequential decision-making problem, in which we aim to find a suitable trade-off between the computational cost of training exploratory (proxy-) models and final mixture performance. 
+<br>Secondly, we systematically explore the properties of transferring mixtures learned at a small scale to larger-scale experiments, providing insights and highlighting opportunities for research at a modest scale. 
 By proposing Multi-fidelity Bayesian Optimization as a suitable method in this common scenario, we introduce a natural framework to balance experiment cost with model fit, 
-avoiding the risks of overfitting to smaller scales while minimizing the number of experiments at high cost. We present results for pre-training and instruction finetuning across models ranging from 1 million to 7 billion parameters, 
+avoiding the risks of overfitting to smaller scales while minimizing the number of experiments at high cost. 
+<br>We present results for pre-training and instruction finetuning across models ranging from 1 million to 7 billion parameters, 
 varying from simple architectures to state-of-the-art models and benchmarks spanning dozens of datasets. We demonstrate consistently strong results relative to a wide range of benchmarks, 
 showing a <b>speed-ups of over 500%</b> in determining the best data mixture on our largest experiments relative to recent baselines. In addition, we broaden access to research by sharing <em>ADMIRE IFT Runs</em>, 
 a dataset of 460 full training & evaluation runs reproducible post-training pipelines worth over <b>13,000 GPU hours</b>, greatly reducing the cost of conducting research in this area. 
@@ -160,13 +161,14 @@ Finally, we highlight rich opportunities for future research in this area, helpi
 </section>
 <!-- End paper abstract -->
 
+<!-- Images -->
 <section class="hero is-small">
   <div class="hero-body">
     <div class="container">
-      <div class="columns is-vcentered">
+      <div style="display: flex; flex-direction: column; align-items: center;">
         
         <div class="column">
-          <img src="static/images/admire_bo_figure_v4.png" alt="Diagram of the ADMIRE-BayesOpt method"/>
+          <img class="responsive-img size-large" src="static/images/fig_1.svg" alt="Diagram of the ADMIRE-BayesOpt method"/>
           <h2 class="subtitle has-text-centered">
             An Overview of our method. We model the contribution of training domains to a target evaluation
             with a Gaussian Process. By finding the maximum of an acquisition function that provides a numeric trade-off
@@ -175,17 +177,53 @@ Finally, we highlight rich opportunities for future research in this area, helpi
           </h2>
         </div>
 
-        <div class="column">
-          <img src="static/images/overall_violinplot.png" alt="Violin plot of validation performance"/>
-          <h2 class="subtitle has-text-centered">
-            Overall distribution of final average validation performance across in-distribution (ID) and out-of-distribution (OOD) datasets. 
-          </h2>
+        <div class="columns is-vcentered">
+          <div class="column">
+            <img class="responsive-img size-small" src="static/images/fib_2a.svg" alt="Violin plot of validation performance"/>
+            <h2 class="subtitle has-text-centered">
+              (a)
+            </h2>
+          </div>
+
+          <div class="column">
+            <img class="responsive-img size-small" src="static/images/fig_2b.svg" alt="Violin plot of validation performance"/>
+            <h2 class="subtitle has-text-centered">
+              (b)
+            </h2>
+          </div>
         </div>
+
+        <h2 class="subtitle has-text-centered">
+            Results obtained running our data mixture optimization pipeline. (a) ADMIRE-BO in comparison to
+            RegMix on the Tülu 3 SFT dataset. Shown is the performance of a Qwen-2.5 7B model when trained
+            on a discovered mixture. (b) Experiment scheduling and performance for ADMIRE-MFBO. Experimental
+            runs are divided into broadly three phases.
+        </h2>
 
       </div>
     </div>
   </div>
 </section>
+
+<style>
+  .responsive-img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 100%;
+    height: auto;
+  }
+  
+  .size-large {
+    width: 900px;
+  }
+
+  .size-small {
+    width: 420px;
+  }
+</style>
+
+
 
 <!--BibTex citation -->
   <section class="section" id="BibTeX">
